@@ -95,13 +95,4 @@ RSpec.describe "/api/v1/partners/entities", type: :request do
       end
     end
   end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested entity" do
-      entity = Entity.create! valid_attributes
-      expect {
-        delete api_v1_partners_entity_url(entity), headers: valid_headers, as: :json
-      }.to change(Entity, :count).by(-1)
-    end
-  end
 end

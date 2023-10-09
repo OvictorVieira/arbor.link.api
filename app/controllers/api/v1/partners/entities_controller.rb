@@ -1,45 +1,37 @@
 class Api::V1::Partners::EntitiesController < ApplicationController
-  before_action :set_api_v1_entity, only: %i[ show update destroy ]
+  before_action :set_entity, only: %i[ show update ]
 
   # GET /api/v1/entities
   def index
-    @api_v1_entities = V1::Partners::EntitiesService.get_all
+    @entities = V1::Partners::EntitiesService.get_all
 
-    render json: @api_v1_entities
-
+    render json: @entities, each_serializer: ::EntitySerializer
   end
 
   # GET /api/v1/entities/1
   def show
-    render json: @api_v1_entity
+    render json: @entity
   end
 
   # POST /api/v1/entities
   def create
-    @api_v1_entity = V1::Partners::EntitiesService.create!(api_v1_entity_params)
-    render json: @api_v1_entity, status: :created
+    @entity = V1::Partners::EntitiesService.create!(api_v1_entity_params)
+    render json: @entity, status: :created, serializer: ::EntitySerializer
   rescue CreateFailureError => e
     render json: e.message, status: :unprocessable_entity
   end
 
   # PATCH/PUT /api/v1/entities/1
   def update
-    @api_v1_entity = V1::Partners::EntitiesService.update!(@api_v1_entity, api_v1_entity_params)
-    render json: @api_v1_entity, status: :ok
-  rescue UpdateFailureError => e
-    render json: e.message, status: :unprocessable_entity
-  end
-
-  # DELETE /api/v1/entities/1
-  def destroy
-    V1::Partners::EntitiesService.destroy!(@api_v1_entity)
+    @entity = V1::Partners::EntitiesService.update!(@entity, api_v1_entity_params)
+    render json: @entity, status: :ok, serializer: ::EntitySerializer
   rescue UpdateFailureError => e
     render json: e.message, status: :unprocessable_entity
   end
 
   private
-    def set_api_v1_entity
-      @api_v1_entity = V1::Partners::EntitiesService.find(params[:id])
+    def set_entity
+      @entity = V1::Partners::EntitiesService.find(params[:id])
     end
 
     def api_v1_entity_params
