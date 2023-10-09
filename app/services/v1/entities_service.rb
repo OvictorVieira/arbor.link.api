@@ -35,7 +35,7 @@ class V1::EntitiesService
   def self.destroy!(entity)
     entity.destroy!
 
-  rescue RecordNotDestroyed => e
-    raise DestroyFailureError.new("Error to destroy entity: #{e.errors}")
+  rescue Exception
+    raise DestroyFailureError.new("Error to destroy entity: #{entity.errors}")
   end
 end
