@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: database
+    command: --bind-address=0.0.0.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: arbor_link_development
+      MYSQL_USER: arborLink
+      MYSQL_PASSWORD: arborLink123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/dump:/var/www/html/arbor.link.api/dump
+    networks:
+      - database-network
+
+networks:
+  database-network:
+    driver: bridge

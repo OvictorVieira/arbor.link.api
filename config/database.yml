@@ -1,0 +1,18 @@
+default: &common
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= Rails.application.config.app.database.user %>
+  password: <%= Rails.application.config.app.database.password %>
+  database: <%= Rails.application.config.app.database.name %>
+  host: 0.0.0.0
+  port: 3306
+
+development:
+  <<: *common
+
+test:
+  <<: *common
+
+production:
+  <<: *common
