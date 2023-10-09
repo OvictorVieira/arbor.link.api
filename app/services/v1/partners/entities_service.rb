@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class V1::EntitiesService
+class V1::Partners::EntitiesService
 
   def self.get_all
     Entity.all
@@ -13,7 +13,7 @@ class V1::EntitiesService
   def self.create!(entity_data)
     entity = Entity.new(entity_data)
 
-    V1::EntityParentValidator.validate!(entity)
+    V1::Partners::EntityParentValidator.validate!(entity)
 
     if entity.save
       return entity

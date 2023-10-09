@@ -1,9 +1,9 @@
-class Api::V1::EntitiesController < ApplicationController
+class Api::V1::Partners::EntitiesController < ApplicationController
   before_action :set_api_v1_entity, only: %i[ show update destroy ]
 
   # GET /api/v1/entities
   def index
-    @api_v1_entities = V1::EntitiesService.get_all
+    @api_v1_entities = V1::Partners::EntitiesService.get_all
 
     render json: @api_v1_entities
 
@@ -16,7 +16,7 @@ class Api::V1::EntitiesController < ApplicationController
 
   # POST /api/v1/entities
   def create
-    @api_v1_entity = V1::EntitiesService.create!(api_v1_entity_params)
+    @api_v1_entity = V1::Partners::EntitiesService.create!(api_v1_entity_params)
     render json: @api_v1_entity, status: :created
   rescue CreateFailureError => e
     render json: e.message, status: :unprocessable_entity
@@ -24,7 +24,7 @@ class Api::V1::EntitiesController < ApplicationController
 
   # PATCH/PUT /api/v1/entities/1
   def update
-    @api_v1_entity = V1::EntitiesService.update!(@api_v1_entity, api_v1_entity_params)
+    @api_v1_entity = V1::Partners::EntitiesService.update!(@api_v1_entity, api_v1_entity_params)
     render json: @api_v1_entity, status: :ok
   rescue UpdateFailureError => e
     render json: e.message, status: :unprocessable_entity
@@ -32,14 +32,14 @@ class Api::V1::EntitiesController < ApplicationController
 
   # DELETE /api/v1/entities/1
   def destroy
-    V1::EntitiesService.destroy!(@api_v1_entity)
+    V1::Partners::EntitiesService.destroy!(@api_v1_entity)
   rescue UpdateFailureError => e
     render json: e.message, status: :unprocessable_entity
   end
 
   private
     def set_api_v1_entity
-      @api_v1_entity = V1::EntitiesService.find(params[:id])
+      @api_v1_entity = V1::Partners::EntitiesService.find(params[:id])
     end
 
     def api_v1_entity_params

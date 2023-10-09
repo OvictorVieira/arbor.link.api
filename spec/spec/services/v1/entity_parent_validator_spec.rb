@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe V1::EntityParentValidator do
+RSpec.describe V1::Partners::EntityParentValidator do
   describe '.validate!' do
     let(:network) { create(:entity, entity_type: 'network') }
     let(:school) { create(:entity, entity_type: 'school') }

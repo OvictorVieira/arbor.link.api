@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe V1::EntitiesService do
+RSpec.describe V1::Partners::EntitiesService do
   describe '.get_all' do
     it 'returns all entities' do
       entity1 = create(:entity)

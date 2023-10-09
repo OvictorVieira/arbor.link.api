@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class V1::EntityParentValidator
+class V1::Partners::EntityParentValidator
 
   def self.validate!(entity)
     if entity.class?
