@@ -22,9 +22,5 @@ RSpec.describe Api::V1::Partners::EntitiesController, type: :routing do
     it "routes to #update via PATCH" do
       expect(patch: "/api/v1/partners/entities/1").to route_to("api/v1/partners/entities#update", id: "1")
     end
-
-    it "routes to #destroy" do
-      expect(delete: "/api/v1/partners/entities/1").to route_to("api/v1/partners/entities#destroy", id: "1")
-    end
   end
 end

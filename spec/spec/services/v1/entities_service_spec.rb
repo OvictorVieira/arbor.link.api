@@ -68,26 +68,4 @@ RSpec.describe V1::Partners::EntitiesService do
       end
     end
   end
-
-  describe '.destroy!' do
-    let!(:entity) { create(:entity) }
-
-    it 'destroys the entity' do
-      expect {
-        described_class.destroy!(entity)
-      }.to change(Entity, :count).by(-1)
-    end
-
-    context 'when destruction fails' do
-      before do
-        allow(entity).to receive(:destroy!).and_raise(ActiveRecord::RecordNotDestroyed)
-      end
-
-      it 'raises a DestroyFailureError' do
-        expect {
-          described_class.destroy!(entity)
-        }.to raise_error(DestroyFailureError)
-      end
-    end
-  end
 end

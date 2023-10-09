@@ -23,19 +23,10 @@ class V1::Partners::EntitiesService
   end
 
   def self.update!(entity, params)
-    updated_entity = entity.update(params)
-
-    if updated_entity
-      return updated_entity
+    if entity.update(params)
+      return entity.reload
     else
       raise UpdateFailureError.new("Error to update entity: #{entity.errors}")
     end
-  end
-
-  def self.destroy!(entity)
-    entity.destroy!
-
-  rescue Exception
-    raise DestroyFailureError.new("Error to destroy entity: #{entity.errors}")
   end
 end
