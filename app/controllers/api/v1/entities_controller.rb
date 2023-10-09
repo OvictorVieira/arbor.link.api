@@ -17,7 +17,7 @@ class Api::V1::EntitiesController < ApplicationController
   # POST /api/v1/entities
   def create
     @api_v1_entity = V1::EntitiesService.create!(api_v1_entity_params)
-    render json: @api_v1_entity, status: :created, location: @api_v1_entity
+    render json: @api_v1_entity, status: :created
   rescue CreateFailureError => e
     render json: e.message, status: :unprocessable_entity
   end
@@ -25,7 +25,7 @@ class Api::V1::EntitiesController < ApplicationController
   # PATCH/PUT /api/v1/entities/1
   def update
     @api_v1_entity = V1::EntitiesService.update!(@api_v1_entity, api_v1_entity_params)
-    render json: @api_v1_entity, status: :created, location: @api_v1_entity
+    render json: @api_v1_entity, status: :ok
   rescue UpdateFailureError => e
     render json: e.message, status: :unprocessable_entity
   end
@@ -43,6 +43,6 @@ class Api::V1::EntitiesController < ApplicationController
     end
 
     def api_v1_entity_params
-      params.require(:api_v1_entity).permit(:name, :entity_type, :inep, :parent_id)
+      params.require(:entity).permit(:name, :entity_type, :inep, :parent_id)
     end
 end

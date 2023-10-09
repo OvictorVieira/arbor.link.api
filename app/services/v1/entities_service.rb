@@ -25,12 +25,10 @@ class V1::EntitiesService
   def self.update!(entity, params)
     updated_entity = entity.update(params)
 
-    V1::EntityParentValidator.validate!(updated_entity)
-
     if updated_entity
       return updated_entity
     else
-      raise UpdateFailureError.new("Error to update entity: #{updated_entity.errors}")
+      raise UpdateFailureError.new("Error to update entity: #{entity.errors}")
     end
   end
 
