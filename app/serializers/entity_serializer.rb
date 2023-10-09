@@ -4,4 +4,8 @@ class EntitySerializer < ActiveModel::Serializer
   def subtree_ids
     object.subtree_ids
   end
+
+  def self.transform_key_casing!(value, _options)
+    value.underscore
+  end
 end
