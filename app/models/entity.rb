@@ -12,6 +12,10 @@ class Entity < ApplicationRecord
   validates :entity_type, presence: true
   validate :class_must_have_parent
 
+  def subtree_ids
+    children.pluck(:id)
+  end
+
   private
 
   def class_must_have_parent
