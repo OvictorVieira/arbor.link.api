@@ -4,10 +4,9 @@ class CreateEntities < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :entity_type
       t.string :inep
-      t.integer :parent_id
+      t.references :parent, foreign_key: { to_table: :entities, null: true }
 
       t.timestamps
     end
-    add_index :entities, :parent_id
   end
 end

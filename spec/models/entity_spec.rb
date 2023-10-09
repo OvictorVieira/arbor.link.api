@@ -37,6 +37,6 @@ RSpec.describe Entity, type: :model do
 
   describe 'associations' do
     it { should belong_to(:parent).class_name('Entity').optional }
-    it { should have_many(:children).class_name('Entity').with_foreign_key('parent_id') }
+    it { should have_many(:entities).class_name('Entity').with_foreign_key('parent_id') }
   end
 end

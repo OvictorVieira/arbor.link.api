@@ -1,11 +1,27 @@
 class EntitySerializer < ActiveModel::Serializer
-  attributes :id, :entity_type, :inep, :name, :parent_id, :subtree_ids
+  class << self
 
-  def subtree_ids
-    object.subtree_ids
-  end
+    def serialize_entities(entities)
+      entities.map(&method(:format_entity))
+    end
 
-  def self.transform_key_casing!(value, _options)
-    value.underscore
+    def serialize_entity(entity)
+      format_entity(entity)
+    end
+
+    private
+
+    def format_entity(entity)
+      {
+        data: {
+          id: entity.id,
+          name: entity.name,
+          entity_type: entity.entity_type,
+          inep: entity.inep,
+          parent_id: entity.parent_id,
+          subtree_ids: entity.subtree_ids
+        }
+      }
+    end
   end
 end

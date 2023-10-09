@@ -1,6 +1,6 @@
 class Entity < ApplicationRecord
   belongs_to :parent, class_name: 'Entity', optional: true
-  has_many :children, class_name: 'Entity', foreign_key: 'parent_id'
+  has_many :entities, class_name: 'Entity', foreign_key: 'parent_id'
 
   enum entity_type: {
     network: 'Network',
@@ -13,7 +13,7 @@ class Entity < ApplicationRecord
   validate :class_must_have_parent
 
   def subtree_ids
-    children.pluck(:id)
+    entities.pluck(:id)
   end
 
   private

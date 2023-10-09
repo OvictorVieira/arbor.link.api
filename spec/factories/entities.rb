@@ -3,6 +3,6 @@ FactoryBot.define do
     name { "Escola Exemplo" }
     entity_type { "school" }
     inep { "123456" }
-    parent_id { 1 }
+    parent_id {}
   end
 end
