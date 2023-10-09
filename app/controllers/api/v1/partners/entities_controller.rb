@@ -20,7 +20,7 @@ class Api::V1::Partners::EntitiesController < ApplicationController
     @entity = V1::Partners::EntitiesService.create!(api_v1_entity_params)
     render json: ::EntitySerializer.serialize_entity(@entity), status: :created
   rescue CreateFailureError => e
-    render json: e.message, status: :unprocessable_entity
+    render json: { message: e.message }, status: :unprocessable_entity
   end
 
   # PATCH/PUT /api/v1/entities/1
@@ -28,7 +28,7 @@ class Api::V1::Partners::EntitiesController < ApplicationController
     @entity = V1::Partners::EntitiesService.update!(@entity, api_v1_entity_params)
     render json: ::EntitySerializer.serialize_entity(@entity), status: :ok
   rescue UpdateFailureError => e
-    render json: e.message, status: :unprocessable_entity
+    render json: { message: e.message }, status: :unprocessable_entity
   end
 
   private
