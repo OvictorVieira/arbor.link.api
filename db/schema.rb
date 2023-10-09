@@ -15,10 +15,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_09_134243) do
     t.string "name"
     t.string "entity_type"
     t.string "inep"
-    t.integer "parent_id"
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_entities_on_parent_id"
   end
 
+  add_foreign_key "entities", "entities", column: "parent_id"
 end

@@ -5,18 +5,20 @@ class Api::V1::Partners::EntitiesController < ApplicationController
   def index
     @entities = V1::Partners::EntitiesService.get_all
 
-    render json: @entities, each_serializer: ::EntitySerializer
+    serialized_entities =  ::EntitySerializer.serialize_entities(@entities)
+
+    render json: serialized_entities, status: :ok
   end
 
   # GET /api/v1/entities/1
   def show
-    render json: @entity
+    render json: ::EntitySerializer.serialize_entity(@entity)
   end
 
   # POST /api/v1/entities
   def create
     @entity = V1::Partners::EntitiesService.create!(api_v1_entity_params)
-    render json: @entity, status: :created, serializer: ::EntitySerializer
+    render json: ::EntitySerializer.serialize_entity(@entity), status: :created
   rescue CreateFailureError => e
     render json: e.message, status: :unprocessable_entity
   end
@@ -24,7 +26,7 @@ class Api::V1::Partners::EntitiesController < ApplicationController
   # PATCH/PUT /api/v1/entities/1
   def update
     @entity = V1::Partners::EntitiesService.update!(@entity, api_v1_entity_params)
-    render json: @entity, status: :ok, serializer: ::EntitySerializer
+    render json: ::EntitySerializer.serialize_entity(@entity), status: :ok
   rescue UpdateFailureError => e
     render json: e.message, status: :unprocessable_entity
   end

@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe EntitySerializer, type: :serializer do
   let(:entity) { create(:entity) }
-  let(:serialized) { EntitySerializer.new(entity) }
+  let(:serialized) { EntitySerializer.serialize_entity(entity) }
 
-  subject { JSON.parse(serialized.to_json) }
+  subject { JSON.parse(serialized.to_json)['data'] }
 
   it 'includes the expected attributes' do
     expect(subject.keys).to match_array(%w[id entity_type inep name parent_id subtree_ids])
