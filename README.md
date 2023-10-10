@@ -60,7 +60,7 @@ This structure provides an organized view of the main components of the applicat
 
 ## Postman Collection
 
-To test the API endpoints, you can use the provided Postman collection. [Download the collection here](https://github.com/OvictorVieira/arbor.link.api/files/12859259/arbor.link.api.postman.collection.json) and import it into your Postman application.
+To test the API endpoints, you can use the provided Postman collection. [Download the collection here](https://github.com/OvictorVieira/arbor.link.api/files/12862900/arbor.link.api.postman.collection.json) and import it into your Postman application.
 
 ## Prerequisites
 
