@@ -1,58 +1,34 @@
-# syntax = docker/dockerfile:1
+# Use the official Ruby 2.7.3 image as a base
+FROM ruby:2.7.3
 
-FROM ruby:2.7.3-slim as base
+# Set the working directory in the Docker image
+WORKDIR /app
 
-# Rails app lives here
-WORKDIR /rails
+# Set environment variables for Rails
+ENV RAILS_ENV production
+ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_SERVE_STATIC_FILES true
 
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+# Install system dependencies
+RUN apt-get update -qq && apt-get install -y \
+  build-essential \
+  libpq-dev \
+  nodejs \
+  default-mysql-client \
+  default-libmysqlclient-dev \
+  && rm -rf /var/lib/apt/lists/*
 
+# Copy the Gemfile and Gemfile.lock into the image
+COPY Gemfile* /app/
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+# Install gems
+RUN bundle install --without development test
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential default-libmysqlclient-dev git libvips pkg-config && libmariadbclient-dev
+# Copy the rest of the application into the image
+COPY . /app/
 
-# Install application gems
-COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:2.2.17 && \
-    bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
-
-# Copy application code
-COPY . .
-
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
-
-
-# Final stage for app image
-FROM base
-
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl default-mysql-client libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
-
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Start the server by default, this can be overwritten at runtime
+# Expose the port the app runs on
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+
+# The command to run the application
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
