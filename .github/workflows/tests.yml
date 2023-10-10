@@ -1,0 +1,44 @@
+name: Rails Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.3
+
+      - name: Build and test with Rake
+        env:
+          RAILS_ENV: test
+          DATABASE_USERNAME: root
+          DATABASE_PASSWORD: root
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_PORT: 3306
+        run: |
+          sudo apt-get -yqq install libmysqlclient-dev
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+          bundle exec rspec
