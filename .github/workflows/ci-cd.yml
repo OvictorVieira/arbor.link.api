@@ -60,6 +60,3 @@ jobs:
           usedocker: true
           dockerfile_directory: ./
           dockerfile_name: Dockerfile
-          run: |
-            bundle exec rails db:create
-            bundle exec rails db:migrate
