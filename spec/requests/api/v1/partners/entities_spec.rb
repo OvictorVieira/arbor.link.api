@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "/api/v1/partners/entities", type: :request do
+  let(:user) { FactoryBot.create(:user, email: "test@example.com", password: "password123") }
+  let(:token) {
+    JWT.encode({ user_id: user.id }, Rails.application.config.app.jwt.jwt_secret, 'HS256')
+  }
+
+  let(:valid_headers) {
+    {
+      "Content-Type" => "application/json",
+      "Accept" => "application/json",
+      "Authorization" => "#{token}"
+    }
+  }
+
   let(:created_entity) { FactoryBot.create(:entity) }
 
   let(:valid_attributes) {
@@ -15,13 +28,6 @@ RSpec.describe "/api/v1/partners/entities", type: :request do
     { name: "Updated Entity", entity_type: "network", inep: '1234' }
   }
 
-  let(:valid_headers) {
-    {
-      "Content-Type" => "application/json",
-      "Accept" => "application/json"
-    }
-  }
-
   describe "GET /index" do
     it "renders a successful response" do
       Entity.create! valid_attributes
@@ -33,7 +39,7 @@ RSpec.describe "/api/v1/partners/entities", type: :request do
   describe "GET /show" do
     it "renders a successful response" do
       entity = Entity.create! valid_attributes
-      get api_v1_partners_entity_url(entity), as: :json
+      get api_v1_partners_entity_url(entity), headers: valid_headers, as: :json
       expect(response).to be_successful
     end
   end
