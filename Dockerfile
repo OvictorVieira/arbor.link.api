@@ -27,8 +27,6 @@ RUN bundle install --without development test
 # Copy the rest of the application into the image
 COPY . /app/
 
-RUN bundle exec rails db:create && bundle exec rails db:migrate
-
 # Expose the port the app runs on
 EXPOSE 3000
 
