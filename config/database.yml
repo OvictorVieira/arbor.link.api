@@ -5,7 +5,7 @@ default: &common
   username: <%= Rails.application.config.app.database.user %>
   password: <%= Rails.application.config.app.database.password %>
   database: <%= Rails.application.config.app.database.name %>
-  host: 0.0.0.0
+  host: <%= Rails.application.config.app.database.host %>
   port: 3306
 
 development:
