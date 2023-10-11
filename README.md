@@ -1,12 +1,12 @@
-Great! You've provided the tree structure of your `app` directory. Let's integrate this into the README.
-
----
-
 # Arbor Link API Documentation
 
 ## Introduction
 
 Arbor Link API is a robust system designed to manage entities and their relationships. This documentation provides a comprehensive guide on how to set up, use, and contribute to the Arbor Link API.
+
+## Production URL
+
+The live application is deployed on [Heroku](https://www.heroku.com/) and can be accessed at [https://arbor-link-api-22474c398d03.herokuapp.com](https://arbor-link-api-22474c398d03.herokuapp.com). The database is hosted on [Amazon RDS Free Tier](https://aws.amazon.com/pt/rds/free/).
 
 ## Table of Contents
 
@@ -18,10 +18,6 @@ Arbor Link API is a robust system designed to manage entities and their relation
 6. [Testing](#testing)
 7. [Project Structure](#project-structure)
 8. [Postman Collection](#postman-collection)
-
-## Prerequisites
-
-... (rest of the sections)
 
 ## Project Structure
 
@@ -61,6 +57,10 @@ This structure provides an organized view of the main components of the applicat
 ## Postman Collection
 
 To test the API endpoints, you can use the provided Postman collection. [Download the collection here](https://github.com/OvictorVieira/arbor.link.api/files/12862900/arbor.link.api.postman.collection.json) and import it into your Postman application.
+
+To the **local** environment use [localhost:3000](localhost:3000) as the `base_url` variable value.
+
+To the **production** environment use [https://arbor-link-api-22474c398d03.herokuapp.com](https://arbor-link-api-22474c398d03.herokuapp.com) as the `base_url` variable value.
 
 ## Prerequisites
 
