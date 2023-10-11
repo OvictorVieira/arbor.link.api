@@ -1,3 +1,5 @@
+<img src="https://img.shields.io/static/v1?label=COVERAGE&message=100&color=green&style=for-the-badge"/> <img src="https://img.shields.io/static/v1?label=Ruby&message=2.7.3&color=red&style=for-the-badge&logo=RUBY"/> <img src="https://img.shields.io/static/v1?label=Ruby%20on%20Rails&message=7.1.0&color=red&style=for-the-badge&logo=Ruby"/>
+
 # Arbor Link API Documentation
 
 ## Introduction
@@ -142,3 +144,28 @@ The API uses JWT (JSON Web Token) for authentication. To authenticate:
 - **Setting Up the Test Environment:** Ensure the test database is set up and migrations are run.
 - **Running Tests:** Use `make run-tests` to run the tests.
 - **Understanding Test Results:** Review the output of the `rspec` command to understand test results and any failures.
+
+## Test Coverage
+
+At Arbor Link API, we prioritize the quality and reliability of our codebase. To ensure that our application is thoroughly tested, we utilize the `coverage` gem to monitor our test coverage.
+
+### Checking Test Coverage
+
+After running the tests, a coverage report will be generated in the `coverage/` directory. This report provides detailed insights into which parts of the application are covered by tests and which areas might need more attention.
+
+To view the test coverage report:
+
+1. Ensure you have run the tests using the command:
+   ```bash
+   make run-tests
+   ```
+
+2. After the tests have completed, navigate to the `coverage/` directory in the project root.
+
+3. Run the command bellow to see the coverage page:
+   ```bash
+   open coverage/index.html
+   ```
+
+5. Browse through the report to see the coverage statistics and details for each file.
+
