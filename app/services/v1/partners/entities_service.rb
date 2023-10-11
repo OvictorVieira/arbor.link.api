@@ -26,7 +26,7 @@ class V1::Partners::EntitiesService
     if entity.update(params)
       return entity.reload
     else
-      raise UpdateFailureError.new("Error to update entity: #{entity.errors}")
+      raise UpdateFailureError.new("Error to update entity: #{entity.errors.full_messages.join(', ')}")
     end
   end
 end
