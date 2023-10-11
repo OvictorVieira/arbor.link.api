@@ -50,4 +50,4 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           name: coverage-report
-          path: coverage/
+          directory: coverage/

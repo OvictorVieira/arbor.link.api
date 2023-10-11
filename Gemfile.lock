@@ -87,6 +87,8 @@ GEM
     builder (3.2.4)
     case_transform (0.2)
       activesupport
+    codecov (0.6.0)
+      simplecov (>= 0.15, < 0.22)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -236,6 +238,7 @@ DEPENDENCIES
   active_model_serializers
   bcrypt
   bootsnap
+  codecov
   debug
   factory_bot_rails
   faker
