@@ -12,14 +12,16 @@ The live application is deployed on [Heroku](https://www.heroku.com/) and can be
 
 ## Table of Contents
 
-1. [Prerequisites](#prerequisites)
-2. [Installation](#installation)
-3. [Database Structure](#database-structure)
-4. [Usage](#usage)
-5. [Endpoints](#endpoints)
-6. [Testing](#testing)
-7. [Project Structure](#project-structure)
-8. [Postman Collection](#postman-collection)
+1. [Project Structure](#project-structure)
+2. [Postman Collection](#postman-collection)
+3. [Prerequisites](#prerequisites)
+4. [Installation](#installation)
+5. [Database Structure](#database-structure)
+6. [Usage](#usage)
+7. [Endpoints](#endpoints)
+8. [Testing](#testing)
+9. [Test Coverage](#test-coverage)
+10. [Release and Deployment](#release-and-deployment)
 
 ## Project Structure
 

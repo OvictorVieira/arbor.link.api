@@ -12,7 +12,7 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root_password
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
@@ -29,9 +29,10 @@ jobs:
       - name: Build and test with Rake
         env:
           RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           DATABASE_USERNAME: root
-          DATABASE_PASSWORD: root
-          DATABASE_HOST: 127.0.0.1
+          DATABASE_PASSWORD: root_password
+          DATABASE_HOST: 0.0.0.0
           DATABASE_PORT: 3306
         run: |
           sudo apt-get -yqq install libmysqlclient-dev
@@ -40,3 +41,10 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:migrate
           bundle exec rspec
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          name: coverage-report
+          path: coverage/
