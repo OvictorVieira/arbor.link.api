@@ -1,19 +1,18 @@
-name: CI/CD Pipeline
+name: Rails Tests
 
 on:
-  push:
-    tags:
-      - '*'
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     services:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
@@ -30,10 +29,9 @@ jobs:
       - name: Build and test with Rake
         env:
           RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           DATABASE_USERNAME: root
-          DATABASE_PASSWORD: root_password
-          DATABASE_HOST: 0.0.0.0
+          DATABASE_PASSWORD: root
+          DATABASE_HOST: 127.0.0.1
           DATABASE_PORT: 3306
         run: |
           sudo apt-get -yqq install libmysqlclient-dev
@@ -42,21 +40,3 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:migrate
           bundle exec rspec
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          usedocker: true
-          dockerfile_directory: ./
-          dockerfile_name: Dockerfile
