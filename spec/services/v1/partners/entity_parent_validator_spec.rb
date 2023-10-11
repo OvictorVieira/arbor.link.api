@@ -12,7 +12,7 @@ RSpec.describe V1::Partners::EntityParentValidator do
         it 'raises a CreateFailureError' do
           expect {
             described_class.validate!(class_entity)
-          }.to raise_error(CreateFailureError, "A Class entity must have a parent (Network or School)")
+          }.to raise_error(CreateFailureError, "The parent_id (Network or School) provided does not exist.")
         end
       end
 
@@ -24,7 +24,7 @@ RSpec.describe V1::Partners::EntityParentValidator do
         it 'raises a CreateFailureError' do
           expect {
             described_class.validate!(class_entity)
-          }.to raise_error(CreateFailureError, "A Class entity must have a parent (Network or School)")
+          }.to raise_error(CreateFailureError, "The parent_id (Network or School) provided does not exist.")
         end
       end
 
