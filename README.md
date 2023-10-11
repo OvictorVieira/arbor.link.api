@@ -58,7 +58,7 @@ This structure provides an organized view of the main components of the applicat
 
 To test the API endpoints, you can use the provided Postman collection. [Download the collection here](https://github.com/OvictorVieira/arbor.link.api/files/12862900/arbor.link.api.postman.collection.json) and import it into your Postman application.
 
-To the **local** environment use [localhost:3000](localhost:3000) as the `base_url` variable value.
+To the **local** environment use [localhost:3000](http://localhost:3000) as the `base_url` variable value.
 
 To the **production** environment use [https://arbor-link-api-22474c398d03.herokuapp.com](https://arbor-link-api-22474c398d03.herokuapp.com) as the `base_url` variable value.
 
