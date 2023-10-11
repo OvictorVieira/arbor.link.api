@@ -1,5 +1,6 @@
 require 'simplecov'
 SimpleCov.start
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
