@@ -12,7 +12,7 @@ class V1::Users::UsersService
     if user.save
       return user
     else
-      raise CreateFailureError.new("Error to create new entity: #{user.errors.full_messages.join(', ')}")
+      raise CreateFailureError.new("#{user.errors.full_messages.join(', ')}")
     end
   end
 end

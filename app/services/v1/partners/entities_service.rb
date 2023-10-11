@@ -18,7 +18,7 @@ class V1::Partners::EntitiesService
     if entity.save
       return entity
     else
-      raise CreateFailureError.new("Error to create new entity: #{entity.errors.full_messages.join(', ')}")
+      raise CreateFailureError.new("#{entity.errors.full_messages.join(', ')}")
     end
   end
 
@@ -26,7 +26,7 @@ class V1::Partners::EntitiesService
     if entity.update(params)
       return entity.reload
     else
-      raise UpdateFailureError.new("Error to update entity: #{entity.errors.full_messages.join(', ')}")
+      raise UpdateFailureError.new("#{entity.errors.full_messages.join(', ')}")
     end
   end
 end
