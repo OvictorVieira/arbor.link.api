@@ -169,3 +169,21 @@ To view the test coverage report:
 
 5. Browse through the report to see the coverage statistics and details for each file.
 
+## Release and Deployment
+
+### Publishing via Tags
+
+At Arbor Link API, we believe in structured and organized releases. To ensure consistency and traceability, we use a tag-based release system. This means that every significant change or release of the application is marked with a specific tag, following the [Semantic Versioning](https://semver.org/) convention.
+
+#### How it Works:
+
+1. **Development & Testing:** Once a feature is developed and thoroughly tested, it's merged into the main branch.
+2. **Tagging:** Before a release, a new tag is created. This tag represents the version of the application. For example, `v1.0.0`.
+3. **Deployment:** Our CI/CD pipeline is triggered by the creation of tags. Once a new tag is pushed, the pipeline automates the deployment process, ensuring that the tagged version of the application is deployed.
+4. **Accessing Releases:** You can view all the tags and releases in the "Releases" section of our GitHub repository. Each release will have detailed notes and changes that were introduced in that version.
+
+#### Benefits:
+
+- **Traceability:** Each release is traceable, and you can easily revert to a previous version if needed.
+- **Stability:** By releasing through tags, we ensure that only stable and tested features make it to production.
+- **Clarity:** Each tag comes with release notes, providing a clear understanding of the changes.
